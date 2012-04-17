@@ -3,7 +3,7 @@
 %% Author: Tobias Volkmar
 %% Created: 2012-04-05
 
-%% TODO: AWGN, scatterplot
+%% TODO: AWGN
 
 function X= UWB_multi_antenna()
 	%% Eingabewerte 4x4
@@ -13,7 +13,7 @@ function X= UWB_multi_antenna()
 	h=rand(4,4)+1j*rand(4,4);   %Zufallskanal
 
 	%%iFFT, Faltung und FFT
-	for k=1:4                   %KOMMENTARE
+	for k=1:4                   %X
 		x=ifft(X(:,k));
 		y=cconvOctave(h(:,k),x);
 		Y(:,k)=fft(y);
@@ -22,6 +22,5 @@ function X= UWB_multi_antenna()
 	
 	%%Decoder
 	X=Y./H;
-    %% runden mit Rauschen
 end
     

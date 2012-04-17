@@ -5,17 +5,21 @@
 
 function X= UWB_single_antenna()
 	%% Eingabewerte 4x1
-	X=[1:4]'
+	X=[1:4]';
     
-	%% Uebertragungsfunktion
+	%% ?bertragungsfunktion
 	h=rand(4,4)+1i*rand(4,4);
 
 	%%IFFT, Faltung und FFT
 	x=ifft(X);
-	y=cconvOctave(h(:,1),x);
+	y=cconv(h(:,1),x);
 	Y=fft(y);
 	H=fft(h);
 
 	%%Decoder
 	X=Y./H(:,1);
-end
+endfunction
+
+function Y=cconv(x,y)
+	Y=ifft(fft(x).*fft(y));
+endfunction
